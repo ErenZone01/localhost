@@ -1,0 +1,41 @@
+[error_pages]
+error_404 = "error/error_404.html"
+error_405 = "error/error_405.html"
+error_500 = "error/error_500.html"
+error_400 = "error/error_400.html"
+
+[limits]
+client_body_size = 10485760  # 10 MB
+
+[route.default]
+methods = ["POST", "GET", "DELETE"]
+root_directory = "src/route1"
+default = "index.html"
+cgi = "cgi_bin/script.py"
+
+[route.other]
+methods = ["GET"]
+root_directory = "src/route2"
+default = "index.html"
+cgi = "cgi_bin/script.sh"
+
+[[servers]]
+address = "127.0.0.1"
+port = 8080
+hostname = "localhost"
+root = "src/route1"
+default_file = "index.html"
+
+[[servers]]
+address = "127.0.0.1"
+port = 8081
+hostname = "test.com"
+root = "src/route2"
+default_file = "index.html"
+
+[[servers]]
+address = "127.0.0.1"
+port = 8082
+hostname = "example.com"
+root = "src/route3"
+default_file = "index.html"
